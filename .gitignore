@@ -1,0 +1,13 @@
+.DS_Store
+*.tmp
+~$*
+
+# Source/reference documents stay local unless explicitly approved.
+Taks Docs/
+*.pdf
+*.docx
+
+# Generated and intermediate artifacts.
+output/
+tmp/
+
