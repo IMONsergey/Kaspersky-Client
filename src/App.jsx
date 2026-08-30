@@ -61,8 +61,25 @@ function MorphGlyph({ from, to, active = false, size = 20, label }) {
 
 function ActionIcon({ from = ArrowRight, to = Sparkles, size = 20 }) {
   const [active, setActive] = useState(false);
+  const iconRef = useRef(null);
+  useEffect(() => {
+    const parent = iconRef.current?.closest(".interactive-icon");
+    if (!parent) return undefined;
+    const on = () => setActive(true);
+    const off = () => setActive(false);
+    parent.addEventListener("pointerenter", on);
+    parent.addEventListener("pointerleave", off);
+    parent.addEventListener("focusin", on);
+    parent.addEventListener("focusout", off);
+    return () => {
+      parent.removeEventListener("pointerenter", on);
+      parent.removeEventListener("pointerleave", off);
+      parent.removeEventListener("focusin", on);
+      parent.removeEventListener("focusout", off);
+    };
+  }, []);
   return (
-    <span className="action-icon" aria-hidden="true" onPointerEnter={() => setActive(true)} onPointerLeave={() => setActive(false)}>
+    <span className="action-icon" aria-hidden="true" ref={iconRef}>
       <MorphIcon icon={active ? to : from} size={size} strokeWidth={1.8} spring="snappy" reducedMotion="user" />
     </span>
   );
@@ -105,7 +122,7 @@ function Header({ active }) {
               <a className="interactive-icon" key={href} href={href} onClick={() => setMenuOpen(false)}><span>{number}</span><strong>{label}</strong><ActionIcon from={ArrowRight} to={Sparkles} size={25} /></a>
             ))}
           </nav>
-          <div className="menu-orbit" aria-hidden="true"><span /><span /><span /><i>90</i></div>
+          <div className="menu-visual" aria-hidden="true"><img src={assetPath("assets/decision-engine-v2.png")} alt="" /></div>
         </div>
       </div>
     </>
