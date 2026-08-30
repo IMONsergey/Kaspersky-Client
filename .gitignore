@@ -1,13 +1,9 @@
 .DS_Store
-*.tmp
-~$*
-
-# Source/reference documents stay local unless explicitly approved.
-Taks Docs/
-*.pdf
-*.docx
-
-# Generated and intermediate artifacts.
-output/
+Thumbs.db
 tmp/
+*.tmp
+*.log
 
+# Client materials are kept locally while this repository is public.
+references/prototypes/*.png
+references/style/*.pdf
