@@ -1,22 +1,24 @@
-# Kaspersky Client Report Rules
+# Kaspersky Client — The Critical 90
 
-This repository stores working rules and production guidance for the new Kaspersky-style report.
+Рабочий репозиторий визуальной концепции executive guide о снижении киберрисков в течение 90 дней.
 
-## Source Of Truth
+## Текущая задача
 
-- New-report content source: `Taks Docs/Отчет длинная версия.docx`.
-- The DOCX content is authoritative. Do not rewrite, paraphrase, summarize, translate, correct, shorten, expand, or invent visible report text.
-- The old PDF report is a visual reference only, not a content source.
+Собрать четыре самостоятельные страницы формата A4 portrait на основе прототипов из Figma. Тексты, их порядок и занимаемые ими зоны не меняются. Визуальный язык должен быть связан с annual report Kaspersky 2025, но не копировать отдельные композиции: новая концепция должна выглядеть более цельно, выразительно и современно.
 
-## Required Format
+## Структура
 
-- New report pages must be A4 portrait.
-- Creative pages and illustrations must follow the old PDF's visual system.
-- Illustrations must be tied to the exact slide context from the DOCX.
+- `AGENTS.md` — обязательные правила работы с проектом.
+- `references/prototypes/` — локальные исходные страницы из Figma; это источник истины для текста и композиционных зон. Пока репозиторий публичный, сами PNG не публикуются.
+- `references/style/` — локальный клиентский PDF-референс. Пока репозиторий публичный, сам PDF не публикуется.
+- `docs/reference-style-analysis.md` — разбор визуальной системы эталонного отчёта.
+- `docs/visual-concept.md` — общая концепция и метафоры четырёх страниц.
+- `prompts/imagegen-prompts.md` — рабочие спецификации для ImageGen.
+- `outputs/concepts/` — итоговые изображения концепции.
 
-## Rule Files
+## Статус
 
-- [New report content rule](docs/new-report-content-rule.md)
-- [Old report style audit](docs/kaspersky-report-style-audit.md)
-- [Illustration style rules](docs/illustration-style-rules.md)
-
+- [x] Исходники собраны.
+- [x] Правила и дизайн-направление зафиксированы.
+- [ ] Сгенерированы четыре концептуальные страницы.
+- [ ] Проверены текст, геометрия, единообразие и отсутствие визуальных клише.
