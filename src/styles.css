@@ -131,7 +131,7 @@ footer .brand>span,footer .brand small{display:none}footer .brand img{width:118p
   .section-frame{min-height:auto;padding-top:calc(var(--header-height) + 64px);padding-bottom:84px}h1{font-size:clamp(48px,14vw,68px)}h2{font-size:clamp(42px,12vw,62px)}
   .primary-cta{width:100%;gap:16px;font-size:16px}.hero{min-height:100svh}.hero-backdrop:after{background:linear-gradient(180deg,var(--graphite) 0 42%,rgb(29 29 27 / 58%) 68%,var(--graphite) 100%)}
   .hero-grid{gap:46px}.hero-support{font-size:16px}.hero-visual{min-height:62vh}.hero-visual figcaption{flex-wrap:wrap}.scroll-cue{display:none}
-  .shifts-section{background-position:130% 2%;background-size:100% auto}.split-heading{margin-bottom:34px}.shift-card{min-height:188px}.shift-stage{min-height:auto}.shift-media{min-height:330px}.shift-evidence{padding:30px 22px 36px}
+  .shifts-section{background-position:0 0,130% 2%;background-size:100% 100%,100% auto}.split-heading{margin-bottom:34px}.shift-card{min-height:188px}.shift-stage{min-height:auto}.shift-media{min-height:330px}.shift-evidence{padding:30px 22px 36px}
   .framework-grid{gap:48px}.phase-tabs button{min-height:52px}.phase-detail{min-height:290px}.timeline-visual{min-height:570px}.timeline-visual img{width:min(62%,280px)}
   .download-section{min-height:100svh}.download-video{object-position:70% center}.download-shade{background:linear-gradient(180deg,rgb(18 21 20 / 94%) 0 48%,rgb(18 21 20 / 55%) 82%,rgb(18 21 20 / 88%))}
   .download-copy{min-height:100svh;justify-content:flex-start;padding-top:calc(var(--header-height) + 88px)}.download-copy h2{font-size:clamp(50px,14.2vw,72px)}.download-dialog{padding:34px 24px 28px}footer{align-items:flex-end}

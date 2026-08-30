@@ -5,6 +5,8 @@ import { A11y, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
+const assetPath = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+
 const shifts = [
   "AI accelerating attacks",
   "Governance of human and non-human identity",
@@ -55,7 +57,7 @@ function useActiveSection() {
 function BrandLogo() {
   return (
     <a className="brand" href="#priority" aria-label="Kaspersky — The Critical 90">
-      <img src="/assets/kaspersky-logo.svg" alt="Kaspersky" />
+      <img src={assetPath("assets/kaspersky-logo.svg")} alt="Kaspersky" />
       <span aria-hidden="true" />
       <small>The Critical 90</small>
     </a>
@@ -94,7 +96,7 @@ function Header({ active }) {
             </a>
           ))}
         </nav>
-        <div className="menu-visual" aria-hidden="true"><img src="/assets/decision-prism.webp" alt="" /></div>
+        <div className="menu-visual" aria-hidden="true"><img src={assetPath("assets/decision-prism.webp")} alt="" /></div>
       </div>
     </>
   );
@@ -103,7 +105,7 @@ function Header({ active }) {
 function Hero() {
   return (
     <section className="hero dark-section" id="priority" data-section>
-      <div className="hero-backdrop" aria-hidden="true"><img src="/assets/esg-hero-scene.webp" alt="" /></div>
+      <div className="hero-backdrop" aria-hidden="true"><img src={assetPath("assets/esg-hero-scene.webp")} alt="" /></div>
       <div className="section-frame hero-grid">
         <div className="hero-copy reveal">
           <p className="eyebrow">The Critical 90 · Executive guide</p>
@@ -113,7 +115,7 @@ function Hero() {
           <a className="primary-cta" href="#shifts">Get your priorities for the next 90 days <ArrowRight size={21} weight="bold" /></a>
         </div>
         <figure className="hero-visual reveal" aria-label="The Critical 90 visual system">
-          <img src="/assets/critical90-cover.webp" alt="Kaspersky cyber-resilience city rendered in dark glass and green light" />
+          <img src={assetPath("assets/critical90-cover.webp")} alt="Kaspersky cyber-resilience city rendered in dark glass and green light" />
           <figcaption><span>Revenue</span><span>Compliance</span><span>Customer trust</span></figcaption>
         </figure>
       </div>
@@ -144,9 +146,9 @@ function Shifts() {
         <div className="shift-stage reveal">
           <div className="shift-media">
             {activeShift === 0 ? (
-              <video autoPlay muted loop playsInline poster="/assets/ai-domino.webp" aria-label="AI accelerating attacks visual"><source src="/assets/ai-shift.mp4" type="video/mp4" /></video>
+              <video autoPlay muted loop playsInline poster={assetPath("assets/ai-domino.webp")} aria-label="AI accelerating attacks visual"><source src={assetPath("assets/ai-shift.mp4")} type="video/mp4" /></video>
             ) : (
-              <img src="/assets/four-shifts.webp" alt="Four connected cyber shifts represented as one technological system" />
+              <img src={assetPath("assets/four-shifts.webp")} alt="Four connected cyber shifts represented as one technological system" />
             )}
             <div className="shift-index" aria-hidden="true">0{activeShift + 1}</div>
           </div>
@@ -183,7 +185,7 @@ function Framework() {
         </div>
         <figure className="timeline-visual reveal">
           <span className="timeline-number">{phases[activePhase].day}</span>
-          <img src="/assets/90-day-tower.webp" alt="A glass 30, 60 and 90 day planning instrument" />
+          <img src={assetPath("assets/90-day-tower.webp")} alt="A glass 30, 60 and 90 day planning instrument" />
           <figcaption>Critical → moderate → measured</figcaption>
         </figure>
       </div>
@@ -196,7 +198,7 @@ function DownloadSection() {
 
   return (
     <section className="download-section dark-section" id="download" data-section>
-      <video className="download-video" autoPlay muted loop playsInline aria-hidden="true"><source src="/assets/kaspersky-finale.mp4" type="video/mp4" /></video>
+      <video className="download-video" autoPlay muted loop playsInline aria-hidden="true"><source src={assetPath("assets/kaspersky-finale.mp4")} type="video/mp4" /></video>
       <div className="download-shade" aria-hidden="true" />
       <div className="section-frame download-copy reveal">
         <p className="eyebrow">04 · The next 90 days</p>
@@ -205,7 +207,7 @@ function DownloadSection() {
       </div>
       <dialog className="download-dialog" ref={dialogRef} onClick={(event) => { if (event.target === dialogRef.current) dialogRef.current.close(); }}>
         <button className="dialog-close" type="button" aria-label="Close" onClick={() => dialogRef.current?.close()}><X size={22} /></button>
-        <img src="/assets/kaspersky-logo.svg" alt="Kaspersky" />
+        <img src={assetPath("assets/kaspersky-logo.svg")} alt="Kaspersky" />
         <p className="eyebrow">The Critical 90</p>
         <h3>Download asset ready to connect</h3>
         <p>Add the final report PDF to <code>public/the-critical-90.pdf</code>; the production download action is already isolated here.</p>
