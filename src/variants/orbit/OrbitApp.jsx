@@ -319,13 +319,12 @@ export function OrbitApp() {
               <img src={assetPath("variants/orbit/four-shift-orbital-assembly.webp")} alt="" loading="lazy" />
               <span aria-hidden="true">0{activeShift + 1}<i>/04</i></span>
             </div>
-            <div className="orbit-shift-list" role="list" aria-label="Four cyber shifts">
+            <div className="orbit-shift-list" role="group" aria-label="Four cyber shifts">
               {shifts.map((shift, index) => (
                 <button
                   key={shift.title}
                   className={index === activeShift ? "is-active" : ""}
                   type="button"
-                  role="listitem"
                   aria-pressed={index === activeShift}
                   onClick={() => setActiveShift(index)}
                   onPointerEnter={() => setActiveShift(index)}
@@ -345,12 +344,11 @@ export function OrbitApp() {
               <p className="orbit-eyebrow">The four cyber shifts</p>
               <h2>For each shift, the guide identifies:</h2>
             </div>
-            <div className="orbit-evidence-list" role="list">
+            <div className="orbit-evidence-list" role="group" aria-label="Evidence leadership can use to assess progress">
               {evidence.map((item, index) => (
                 <button
                   key={item.title}
                   type="button"
-                  role="listitem"
                   className={index === activeEvidence ? "is-active" : ""}
                   aria-pressed={index === activeEvidence}
                   onClick={() => setActiveEvidence(index)}
