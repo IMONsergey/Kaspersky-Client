@@ -10,20 +10,23 @@
 - Keep Kaspersky logo and existing headers unchanged.
 - Add visual form only in available negative space or as controlled depth behind existing modules.
 - Premium Kaspersky visual language: matte near-black, dark glass, translucent acrylic, restrained mint-green emission, subtle cyan/violet optical edges, precise industrial 3D.
+- Build a full-page colorful editorial composition. Large emerald, mint and cyan luminous fields and translucent layers should visually occupy 40–65% of the canvas; restrained violet adds optical depth.
+- Let colored surfaces crop beyond edges and flow between existing text zones while maintaining perfect text contrast.
+- Do not produce a nearly empty black page with one isolated illustration placed in free space.
 - No hacker, hood, padlock, binary rain, generic shield, circuit-board close-up, random AI brain, chaotic particles, fake UI, extra labels or watermark.
 
 ## 01 — Cover
 
-Create a large spatial 90-day pathway in the lower-right negative space: three nested translucent architectural gates representing 30/60/90-day decision horizons. The first gate receives several faint fragmented light paths; the final gate resolves them into one precise Kaspersky-green contour. Sophisticated industrial-design render, strong silhouette, controlled crop beyond the right and bottom edges. Keep the title area completely clear and preserve every original text element exactly.
+Create a full-page 90-day trajectory made from three wide translucent ribbon-horizons. Emerald, mint, cyan and restrained violet light fields enter from the left and lower edges, fold through three spatial stages and resolve into one precise Kaspersky-green vector. The composition must fill the lower two-thirds and connect visually with the upper page through soft reflected color, while keeping the title readable. Strong editorial crop beyond right and bottom edges; not an isolated tunnel or portal object.
 
 ## 02 — Contents
 
-Keep the dense contents list untouched. Build a slim vertical navigation spine along the right side and into the lower negative space: four connected dark-glass nodes, fine luminous green routing line, subtle depth and one restrained violet reflection. The structure should feel like a physical index for an executive cyber-risk system, not a dashboard. Preserve the large `Contents` word as the dominant lower-left anchor. No added labels or numbers.
+Keep the dense contents list untouched. Build a rich full-page navigation field: four transparent nodes along the right side embedded inside broad mint/cyan ribbons and glass layers that softly enter behind the right ends of rows, continue downward and frame the large `Contents` word. The colored architecture must connect top, middle and bottom of the page. It should feel editorial and precise, not like an isolated spine or a dashboard. No added labels or numbers.
 
 ## 03 — Four shifts
 
-Transform the existing four dark cards into the visible front panels of one coherent dark-glass risk machine. Integrate four minimal spatial signals behind the text: compressed impulse for acceleration, intersecting access contours for identity, linked platforms for supply chain, and a sealed AI/data volume with one broken light boundary for leakage. The four panels must read as one system, not four decorative icons. Preserve all existing copy, headers, footnote and page number exactly and keep them fully readable.
+Transform the four cards into luminous glass chambers inside one full-width risk field. A broad colored stream moves through all four modules and changes state: compressed impulse for acceleration, intersecting access contours for identity, linked platforms for supply chain, and a sealed data volume with one broken light boundary for leakage. Use large emerald/mint/cyan translucent planes behind and around the cards with controlled violet depth. No pipes, no steampunk machine, no four separate icons. Preserve all copy exactly.
 
 ## 04 — Filter quote
 
-Place a large translucent optical decision filter/prism in the upper third and partially around the central quote. Many faint disordered lines enter it; one clean Kaspersky-green beam exits. Use dark glass, subtle caustics and restrained cyan/violet edge light. The prism should create depth without sitting over the letterforms. Preserve the complete quote, the lower paragraph, header and page number exactly. No additional text.
+Create a full-page refraction composition, not a prism placed above the text. Broad cyan and restrained violet light layers enter from the left and top edges, pass through a large transparent architectural filter spanning the upper half, curve around the central quote and resolve into one wide emerald/mint field exiting toward the lower-right edge. Use glass caustics and large color surfaces across roughly half the canvas while preserving perfect contrast of the quote and lower paragraph. No additional text.
