@@ -3,7 +3,7 @@
 ## Source alignment
 
 - Reviewed all eight supplied slide images individually at original resolution.
-- Compared the slide contact sheet and all five approved implementation targets in one visual input: `deck-and-targets.jpg`.
+- Compared the slide contact sheet and all five public production heroes in one visual input: `deck-and-production.jpg` (the earlier target comparison is retained as `deck-and-targets.jpg`).
 - Locked the palette, typography, material system and exclusions in `docs/deck-style-system.md`.
 - Replaced the first off-style asset pass with transparent graphite / emerald / violet objects generated specifically for the production slots.
 
@@ -22,6 +22,8 @@
 - `npm run build`: passed.
 - `npm run test:sites`: 4/4 passed.
 - Build output contains all five deep-link entry points and all five production images.
+- Public GitHub Pages routes, lazy application chunks and generated assets return HTTP 200.
+- Production hero comparison confirmed the graphite / emerald / controlled-violet material language, Kaspersky Sans hierarchy and clean 12-column alignment across all five directions.
 - Source scan found no red, orange, yellow, cobalt, paper-collage or cut-paper residue in the new implementation.
 
 ## Findings
