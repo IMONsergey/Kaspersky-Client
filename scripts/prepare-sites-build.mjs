@@ -25,6 +25,11 @@ const appRoutes = [
   "variants/orbit",
   "variants/glass",
   "variants/signal",
+  "variants/spatial",
+  "variants/lottie",
+  "variants/physics",
+  "variants/graph",
+  "variants/poster",
 ];
 
 for (const route of appRoutes) {

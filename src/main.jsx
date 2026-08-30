@@ -63,6 +63,61 @@ const variantRoutes = [
       return SignalApp;
     },
   },
+  {
+    match: "/variants/spatial",
+    className: "spatial-page",
+    load: async () => {
+      const [{ SpatialApp }] = await Promise.all([
+        import("./variants/spatial/SpatialApp.jsx"),
+        import("./variants/spatial/spatial.css"),
+      ]);
+      return SpatialApp;
+    },
+  },
+  {
+    match: "/variants/lottie",
+    className: "lottie-page",
+    load: async () => {
+      const [{ LottieApp }] = await Promise.all([
+        import("./variants/lottie/LottieApp.jsx"),
+        import("./variants/lottie/lottie.css"),
+      ]);
+      return LottieApp;
+    },
+  },
+  {
+    match: "/variants/physics",
+    className: "physics-page",
+    load: async () => {
+      const [{ PhysicsApp }] = await Promise.all([
+        import("./variants/physics/PhysicsApp.jsx"),
+        import("./variants/physics/physics.css"),
+      ]);
+      return PhysicsApp;
+    },
+  },
+  {
+    match: "/variants/graph",
+    className: "graph-page",
+    load: async () => {
+      const [{ GraphApp }] = await Promise.all([
+        import("./variants/graph/GraphApp.jsx"),
+        import("./variants/graph/graph.css"),
+      ]);
+      return GraphApp;
+    },
+  },
+  {
+    match: "/variants/poster",
+    className: "poster-page",
+    load: async () => {
+      const [{ PosterApp }] = await Promise.all([
+        import("./variants/poster/PosterApp.jsx"),
+        import("./variants/poster/poster.css"),
+      ]);
+      return PosterApp;
+    },
+  },
 ];
 
 async function resolveRoute() {
