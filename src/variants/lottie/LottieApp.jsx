@@ -14,7 +14,7 @@ function LottieHero() {
   return <section className="lottie-hero" id="priority">
     <aside className="lottie-side-label"><span>01</span><strong>The priority</strong><em>Kinetic dossier / 07</em></aside>
     <div className="lottie-hero-title"><h1>Focus your cyber<br />budget on the<br /><em>four shifts</em> that<br />matter most</h1><p>{hero.lead}</p><a href="#shifts">{hero.cta}<MorphIcon icon={ArrowRight} size={20} spring="snappy" reducedMotion="user" /></a></div>
-    <div className="lottie-hero-motion"><KineticAnimation imagePath={assetUrl("variants/lottie/ninety-day-instrument.png")} /><div className="lottie-dial"><span>90</span><small>days to focus</small></div></div>
+    <div className="lottie-hero-motion"><img className="lottie-hero-fallback" src={assetUrl("variants/lottie/ninety-day-instrument.png")} alt="" aria-hidden="true" fetchPriority="high" /><KineticAnimation imagePath={assetUrl("variants/lottie/ninety-day-instrument.png")} /><div className="lottie-dial"><span>90</span><small>days to focus</small></div></div>
     <div className="lottie-folio"><span>01 / 04</span><strong>Actionable priorities.<br />Measurable impact.<br />Real protection.</strong></div>
     <a className="lottie-scroll" href="#context"><MorphIcon icon={ArrowDownRight} size={26} spring="snappy" reducedMotion="user" /></a>
   </section>;
