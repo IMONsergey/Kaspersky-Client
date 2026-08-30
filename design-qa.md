@@ -1,96 +1,81 @@
-# Design QA — The Critical 90 website
+# Design QA — The Critical 90 website · generated-asset redesign
 
-**Source visual truth paths**
+**Source visual truth**
 
 - `qa/source-esg-desktop.jpg` — live capture of `https://esg.kaspersky.com/`.
-- `public/assets/critical90-cover.webp` — focused visual crop from the supplied presentation.
-- `docs/content-map.md` — supplied landing copy normalized into the implementation map.
+- `docs/content-map.md` — exact supplied landing copy.
+- `prompts/imagegen-prompts.md` — transparent asset art direction and constraints.
+- `https://www.morphicons.com/` — inspected motion reference for interruptible semantic icon morphs.
 
 **Implementation evidence**
 
-- `qa/implementation-desktop-pass2.jpg`
-- `qa/implementation-mobile-menu-pass2.jpg`
-- `qa/comparison-pass2.jpg`
-- `qa/comparison-deck-asset-pass2.jpg`
+- `qa/implementation-desktop-v3.jpg` — published hero at the selected Chrome viewport.
+- `qa/source-esg-desktop-v3-normalized.jpg` — source crop normalized to the implementation viewport.
+- `qa/comparison-v3.jpg` — source and implementation in one combined comparison input.
 
-**Viewport and normalization**
+**Viewport and state**
 
-- Source capture: 1363 × 936 px, CSS viewport 1363 × 936, DPR 1.
-- Implementation capture: 1348 × 926 px, CSS viewport 1348 × 926, DPR 1.
-- Same-state comparison normalized the source with a northwest crop to 1348 × 926; no resampling was used before the side-by-side contact sheet.
-- Mobile implementation was rendered in a real 390 × 844 CSS-pixel iframe viewport inside the selected cloud browser. The surrounding QA canvas is visible only to prove the viewport constraint.
-- State: desktop hero, dark theme, first section active; mobile menu open for the focused interaction check.
+- Source: 1363 × 936 px, normalized with a northwest crop to 1348 × 926 px.
+- Implementation: 1348 × 926 px, DPR 1.
+- State: desktop hero, first section active, all generated assets loaded, reveal settled.
+- The cloud browser rejected an isolated `data:` mobile viewport by its URL security policy. No alternate browser surface was used. Mobile was checked through the responsive source rules and the production DOM structure; a dedicated narrow-viewport screenshot remains a follow-up proof item, not a known visual defect.
 
-## Full-view comparison evidence
+## Combined comparison findings
 
-`qa/comparison-pass2.jpg` places the ESG reference and the rendered hero in one comparison image. Both use the same corporate signature: fixed dark header, large asymmetric headline, graphite/mint palette, right-heavy object scene and a thin green structural frame. The implementation intentionally carries more copy because the supplied landing content requires it.
+`qa/comparison-v3.jpg` confirms the implementation keeps the corporate visual grammar of the ESG reference: exact Kaspersky logo and display face, fixed utility header, dark graphite field, asymmetric editorial headline, one large object gesture and functional mint. The redesign intentionally moves from the reference’s full-frame scene to a more SaaS-like decision system, using a true-alpha generated object plus a restrained canvas trajectory field.
 
-`qa/comparison-deck-asset-pass2.jpg` places the supplied cover artwork and the rendered hero in one input. The final page preserves the deck’s dark glass, green city, controlled cyan/violet optics, oversized typography and Kaspersky badge without copying an A4 composition literally. The full client deck is intentionally not committed to the public repository.
+The implementation is denser in the left headline region because the supplied H1 is materially longer than the reference. The 12-column alignment, edge rhythm and object-to-copy balance remain coherent. There is no visible cropping, distorted logo, unintended image matte, overflow or low-contrast copy in the settled state.
 
-## Focused region evidence
-
-- Header/logo: exact inline SVG and local font were verified at desktop and 390 px mobile.
-- Hero crop: checked after removing embedded slide text from the visible crop.
-- Menu: checked on desktop and mobile; art fills its frame and links remain readable.
-- Four shifts: active card state, Swiper layout and media swap were tested.
-- 30/60/90: tab state and synchronized panel text were tested.
-- Download: dialog opens and presents the explicit PDF integration state.
-
-## Required fidelity surfaces
-
-- **Fonts and typography:** exact `Kaspersky Sans Display` files; correct optical hierarchy, weights, line height and responsive wrapping. No truncation observed.
-- **Spacing and layout rhythm:** frame, split proportions, section padding, radii and header height track the reference’s scene-based rhythm. No horizontal overflow at 390 px.
-- **Colors and tokens:** confirmed Kaspersky graphite/green values; additional cyan/violet only supports the supplied deck’s optics.
-- **Image quality and asset fidelity:** exact Kaspersky logo, original supplied deck crops and source media; no fake SVG/CSS illustration substitutes. Hero crop is clean after pass 1.
-- **Copy and content:** all marketing copy matches `docs/content-map.md`; only the clearly marked download-integration dialog is temporary.
-
-## Comparison history
+## Iteration history
 
 ### Pass 1 — blocked
 
-- [P1] Hero image exposed a partial line of text from the supplied slide crop.
-  Fix: increased the controlled image scale and shifted its focal position so only the intended object scene remains visible.
-- [P1] Menu artwork did not fill the desktop container because `height: 100%` resolved against a `min-height` only.
-  Fix: gave the media frame an explicit desktop and mobile height; changed the menu background to solid graphite.
-- [P2] Bright prism background reduced paragraph contrast in the shifts introduction.
-  Fix: added a 58% graphite overlay while preserving the prism as a secondary optical layer.
-- [P2] Mobile `90` status wrapped below the header because the empty actions wrapper remained in the grid.
-  Fix: removed the wrapper from mobile layout and placed the status in the third grid track.
+- [P1] Hero text and generated object were auto-placed in separate CSS Grid rows because their column ranges overlap.
+  Fix: explicitly locked both scene items to row 1; mobile explicitly restores the visual to row 2.
+- [P1] The four-shift heading was pushed below the object for the same auto-placement reason.
+  Fix: heading and object now share row 1; the card system is explicitly row 2; compact breakpoints return to normal document flow.
+- [P2] The `04 shifts` hero status overlapped the last line of the H1.
+  Fix: moved the status to the upper-right of the generated object and restored the mobile position separately.
+- [P2] CTA icons morphed only when the pointer directly entered the SVG hit area.
+  Fix: each icon now listens to hover/focus state on its full parent control.
 
 ### Pass 2 — passed
 
-Post-fix browser evidence is recorded in `qa/implementation-desktop-pass2.jpg`, `qa/implementation-mobile-menu-pass2.jpg`, `qa/comparison-pass2.jpg` and `qa/comparison-deck-asset-pass2.jpg`. No actionable P0/P1/P2 visual findings remain.
+The settled production hero, menu, shifts, evidence, 90-day introduction, 30/60/90 states and download dialog were visually inspected in the selected cloud Chrome browser. No actionable P0/P1/P2 findings remain.
 
 ## Primary interactions tested
 
-- Open/close desktop menu.
-- Open mobile menu at 390 × 844.
-- Select shift 02 and verify media replacement plus `aria-pressed`.
-- Select day 60 and verify the synchronized tabpanel.
-- Open the Download dialog.
-- Anchor navigation to all four sections and section counter 01–04.
+- Open/close the fullscreen menu; exact navigation targets and generated menu object render correctly.
+- Navigate to all four top-level sections; the header counter updates `01/04` → `04/04`.
+- Select shift 02; `aria-pressed`, card treatment, generated-object caption and Morphicon update.
+- Select evidence item 03; semantic icon morph and active row update.
+- Select day 60; `aria-selected`, card inversion, progress line and icon update.
+- Open and close the Download dialog.
+- Hero canvas responds without intercepting links or buttons.
 
-## Console errors
+## Required fidelity surfaces
 
-No application-origin errors or warnings. The browser reported two unrelated metadata errors from its own Chrome extension content script; they do not originate from the site bundle.
+- **Grid:** one 12-column frame (`1440px` max) is shared by header and every major section; 8-column tablet and 4-column mobile rules are explicit.
+- **Typography:** only local `Kaspersky Sans Display` with the fixed weight and line-height system.
+- **Color:** corporate graphite/mint values; cyan/violet limited to optical edges.
+- **Assets:** three generated PNGs have an `srgba` alpha channel and transparent corner pixels. All previous photos, WebP crops and videos were removed. Only the exact corporate logo remains from the source site.
+- **Motion:** canvas, reveals and Morphicons respect `prefers-reduced-motion`; icons use meaningful from/to pairs rather than decorative spinning.
+- **Copy:** supplied marketing copy remains unchanged; only the clearly marked PDF integration dialog is temporary.
 
-## Open questions
+## Build and console
 
-- Final report PDF was not supplied. The current dialog is an intentional integration placeholder, not a design-QA blocker for this iteration.
-- Public release should follow a corporate licensing check for transferred ESG media/fonts.
+- `npm run build` — passed.
+- `npm run test:sites` — 4/4 passed.
+- Production images report complete loads and valid natural dimensions.
+- Document horizontal overflow at the desktop QA viewport: none.
+- No application-origin console errors or warnings. Logged metadata errors originate from the cloud browser’s Chrome extension.
 
-## Implementation checklist
+## Open question
 
-- [x] Production build passes.
-- [x] Desktop browser QA passes.
-- [x] 390 px mobile layout and menu pass.
-- [x] Core interactive states pass.
-- [x] Source and implementation compared in combined visual inputs.
-- [ ] Connect the approved PDF when supplied.
+- The final report PDF was not supplied. The dialog remains the intentional integration placeholder.
 
-## Follow-up polish
+## Follow-up proof item
 
-- [P3] Compress the 15 MB AI video after the final asset set is approved.
-- [P3] Add dedicated visuals for shifts 02–04 instead of sharing the current four-shift system image.
+- [P3] Record a dedicated 390 × 844 production capture when the selected cloud browser exposes a supported narrow viewport. Responsive CSS and semantic ordering are already present.
 
 final result: passed
