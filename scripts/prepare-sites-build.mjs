@@ -18,4 +18,21 @@ mkdirSync(path.join(dist, ".openai"), { recursive: true });
 copyFileSync(worker, path.join(dist, "server", "index.js"));
 copyFileSync(hosting, path.join(dist, ".openai", "hosting.json"));
 
+const appRoutes = [
+  "variants",
+  "variants/prism",
+  "variants/editorial",
+  "variants/orbit",
+  "variants/glass",
+  "variants/signal",
+];
+
+for (const route of appRoutes) {
+  const routeDir = path.join(dist, "client", route);
+  mkdirSync(routeDir, { recursive: true });
+  copyFileSync(index, path.join(routeDir, "index.html"));
+}
+
+copyFileSync(index, path.join(dist, "client", "404.html"));
+
 console.log("Prepared Sites build: dist/server/index.js and dist/.openai/hosting.json");
