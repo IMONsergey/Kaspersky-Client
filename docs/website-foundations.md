@@ -35,17 +35,19 @@
 
 ## Компоненты
 
-- `Header`: fixed, blur-backed, menu, brand, section counter, report CTA.
-- `Menu panel`: полноэкранная навигация из четырех разделов плюс prism-art.
-- `Hero`: 55/45 split, ключевой тезис, supporting copy, cover scene.
-- `Shift cards`: Swiper, четыре интерактивных состояния, один активный media stage.
-- `90-day framework`: light section, tabs 30/60/90, synchronized detail and tower.
-- `Download`: видео-финал, крупный CTA, dialog-интеграция для будущего PDF.
+- `Header`: fixed, blur-backed, выровнен по общей 12-колоночной сетке; menu, brand, section counter, report CTA.
+- `Menu panel`: полноэкранная навигация из четырех разделов с morphing-иконками.
+- `Hero`: короткий тезис и CTA слева; интерактивный decision-field canvas и прозрачный 3D-объект справа.
+- `Decision`: lead и supporting copy вынесены из hero в отдельную смысловую сцену.
+- `Shift cards`: единая 4-колоночная система, четыре состояния и синхронизированная предметная метафора.
+- `Evidence`: пять результатов отчета оформлены отдельной интерактивной сценой.
+- `90-day framework`: отдельная intro-сцена и три постоянно видимых 30/60/90 карточки.
+- `Download`: типографический финал и dialog-интеграция для будущего PDF.
 
 ## Сетка
 
-- Максимальная ширина content frame: 1600 px.
-- Desktop: двухколоночные split-секции.
+- Максимальная ширина content frame: 1440 px.
+- Desktop: единая 12-колоночная сетка с одинаковыми gutters в header и всех секциях.
 - Tablet ≤1080 px: одна колонка, visual ниже текста.
 - Mobile ≤760 px: 18 px поля, compact header, full-width CTA, без scroll snap.
 - Минимальная ширина: 320 px.
@@ -54,8 +56,9 @@
 
 - Reveal: 760 ms, `cubic-bezier(.2,.8,.2,1)`.
 - Menu: 280 ms.
-- Hover: 180 ms.
-- Media hover: 900 ms.
+- Hover: 180–260 ms.
+- Hero canvas: четыре входных сигнала сходятся к интерактивному focus point.
+- Иконки: `morphicons` + Lucide data, interruptible spring `snappy`; все функциональные пиктограммы меняют смысловое состояние.
 - При `prefers-reduced-motion: reduce` длительности схлопываются до 0.01 ms.
 
 ## Контент и tone of voice
@@ -66,11 +69,10 @@
 
 1. Сохранять предметную метафору и существующий focal point.
 2. Не вставлять изображения с текстом внутрь crop-зоны.
-3. Hero asset должен выдерживать portrait crop на mobile и split crop на desktop.
-4. Фоновое видео: MP4 H.264, muted loop, желательно до 8–10 MB после финальной оптимизации.
-5. Для каждого видео нужен WebP poster.
-6. Не использовать hacker/hoodie/lock/shield clichés.
-7. После каждой замены повторять desktop и mobile browser QA.
+3. Hero asset должен быть PNG/WebP с настоящим alpha channel и выдерживать portrait crop на mobile и split crop на desktop.
+4. Все новые предметные иллюстрации генерируются без фона, текста и логотипов.
+5. Не использовать hacker/hoodie/lock/shield clichés.
+6. После каждой замены повторять desktop и mobile browser QA.
 
 ## Известная интеграционная точка
 

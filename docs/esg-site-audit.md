@@ -105,14 +105,13 @@
 
 | Локальный файл | Источник | Роль |
 |---|---|---|
-| `esg-hero-scene.webp` | `esg.kaspersky.com`, hero Safari background | атмосферный web-layer |
-| `ai-shift.mp4` | `esg.kaspersky.com`, asset `s4` | активная AI-сцена |
-| `kaspersky-finale.mp4` | `esg.kaspersky.com`, asset `s10` | финальный экран |
 | `kaspersky-logo.svg` | inline logo из header референса | бренд в шапке/футере |
 | `kaspersky-sans-display-*.woff2` | font assets референса | точная типографика |
-| `critical90-cover.webp` и остальные WebP | приложенная презентация | собственная art direction The Critical 90 |
+| `decision-engine-v2.png` | ImageGen, создан для проекта | прозрачный hero decision engine |
+| `four-shifts-system-v2.png` | ImageGen, создан для проекта | прозрачная система четырех сдвигов |
+| `90-day-instrument-v2.png` | ImageGen, создан для проекта | прозрачный трехступенчатый planning instrument |
 
-Ассеты сохранены локально: сайт не зависит от доступности референса. Перед публичным продакшен-релизом необходимо подтвердить корпоративное право использования перенесенных media/font assets.
+Фото, WebP и видео из предыдущей итерации удалены. Сайт использует только созданные для проекта прозрачные визуалы, точный corporate logo и локальные WOFF2. Перед публичным продакшен-релизом необходимо подтвердить корпоративное право использования шрифтов и логотипа.
 
 ## 9. Что не копировалось буквально
 

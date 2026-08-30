@@ -30,3 +30,21 @@ Transform the four cards into luminous glass chambers inside one full-width risk
 ## 04 — Filter quote
 
 Create a full-page refraction composition, not a prism placed above the text. Broad cyan and restrained violet light layers enter from the left and top edges, pass through a large transparent architectural filter spanning the upper half, curve around the central quote and resolve into one wide emerald/mint field exiting toward the lower-right edge. Use glass caustics and large color surfaces across roughly half the canvas while preserving perfect contrast of the quote and lower paragraph. No additional text.
+
+---
+
+# Website transparent asset set — main direction
+
+Общие инварианты трех web-вызовов: isolated premium enterprise 3D sculpture; genuine transparent alpha; graphite, smoked glass, clear acrylic and restrained Kaspersky mint; no words, letters, numbers, logos, shields, locks, humans, stock imagery, fake UI or environmental background.
+
+## Hero — decision engine
+
+Premium cybersecurity SaaS decision engine: one graphite core, three translucent fins, four orbiting nodes and one mint light path resolving into a focused output. Portrait composition with generous negative space, designed for the right side of a split hero.
+
+## Four shifts — connected system
+
+One wide horizontal system made from four connected modules: acceleration rails, identity rings, SaaS/supply-chain blocks and an AI data-leak prism. The modules must read as one object, not four icons.
+
+## 30 / 60 / 90 — planning instrument
+
+One vertical three-stage prioritization instrument with distinct ascending levels, a grounded graphite base and focused glass apex. A single restrained mint energy path connects all levels; no literal numbers or calendar symbols.

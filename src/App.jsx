@@ -1,31 +1,32 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowRight, DownloadSimple, List, X } from "@phosphor-icons/react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { A11y, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import { MorphIcon } from "morphicons/react";
+import {
+  Activity, ArrowDown, ArrowRight, Bot, Boxes, ChartNoAxesCombined, Check, Circle,
+  Database, Download, Eye, Fingerprint, Focus, Menu, Network, ScanFace, ScanSearch,
+  Sparkles, Target, TriangleAlert, X, Zap,
+} from "lucide";
 
 const assetPath = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 
 const shifts = [
-  "AI accelerating attacks",
-  "Governance of human and non-human identity",
-  "SaaS ecosystems and supply chain exposure",
-  "Attacks on AI, data leakage",
+  { title: "AI accelerating attacks", from: Bot, to: Zap },
+  { title: "Governance of human and non-human identity", from: Fingerprint, to: ScanFace },
+  { title: "SaaS ecosystems and supply chain exposure", from: Boxes, to: Network },
+  { title: "Attacks on AI, data leakage", from: Database, to: TriangleAlert },
 ];
 
 const evidence = [
-  "The potential business impact",
-  "The decisions that require executive attention",
-  "The functions to involve",
-  "The actions to initiate within 30, 60 and 90 days",
-  "The evidence leadership requires to assess progress",
+  { title: "The potential business impact", from: Circle, to: ChartNoAxesCombined },
+  { title: "The decisions that require executive attention", from: Circle, to: Target },
+  { title: "The functions to involve", from: Circle, to: Network },
+  { title: "The actions to initiate within 30, 60 and 90 days", from: Circle, to: Activity },
+  { title: "The evidence leadership requires to assess progress", from: Circle, to: Check },
 ];
 
 const phases = [
-  { day: "30", kicker: "First 30 days", title: "Establish visibility via critical, urgent tasks", text: "What to fund in the first 30 days to block threats" },
-  { day: "60", kicker: "By 60 days", title: "Strengthen and test once critical tasks are completed", text: "How to strengthen and test at 60 days" },
-  { day: "90", kicker: "By 90 days", title: "Validate and embed at a more measured pace", text: "How to lower the temperature at 90 days" },
+  { day: "30", kicker: "First 30 days", title: "Establish visibility via critical, urgent tasks", text: "What to fund in the first 30 days to block threats", from: Eye, to: ScanSearch },
+  { day: "60", kicker: "By 60 days", title: "Strengthen and test once critical tasks are completed", text: "How to strengthen and test at 60 days", from: Activity, to: Target },
+  { day: "90", kicker: "By 90 days", title: "Validate and embed at a more measured pace", text: "How to lower the temperature at 90 days", from: Focus, to: Check },
 ];
 
 const sectionLinks = [
@@ -37,181 +38,217 @@ const sectionLinks = [
 
 function useActiveSection() {
   const [active, setActive] = useState("priority");
-
   useEffect(() => {
     const sections = [...document.querySelectorAll("[data-section]")];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(visible.target.id);
-      },
-      { rootMargin: "-24% 0px -50%", threshold: [0.1, 0.35, 0.6] },
-    );
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActive(visible.target.id);
+    }, { rootMargin: "-22% 0px -54%", threshold: [0.08, 0.3, 0.6] });
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
-
   return active;
+}
+
+function MorphGlyph({ from, to, active = false, size = 20, label }) {
+  const [engaged, setEngaged] = useState(false);
+  return (
+    <span className="morph-glyph" onPointerEnter={() => setEngaged(true)} onPointerLeave={() => setEngaged(false)} onFocus={() => setEngaged(true)} onBlur={() => setEngaged(false)}>
+      <MorphIcon icon={active || engaged ? to : from} size={size} strokeWidth={1.7} spring="snappy" reducedMotion="user" label={label} />
+    </span>
+  );
+}
+
+function ActionIcon({ from = ArrowRight, to = Sparkles, size = 20 }) {
+  const [active, setActive] = useState(false);
+  return (
+    <span className="action-icon" aria-hidden="true" onPointerEnter={() => setActive(true)} onPointerLeave={() => setActive(false)}>
+      <MorphIcon icon={active ? to : from} size={size} strokeWidth={1.8} spring="snappy" reducedMotion="user" />
+    </span>
+  );
 }
 
 function BrandLogo() {
   return (
     <a className="brand" href="#priority" aria-label="Kaspersky — The Critical 90">
-      <img src={assetPath("assets/kaspersky-logo.svg")} alt="Kaspersky" />
-      <span aria-hidden="true" />
-      <small>The Critical 90</small>
+      <img src={assetPath("assets/kaspersky-logo.svg")} alt="Kaspersky" /><span aria-hidden="true" /><small>The Critical 90</small>
     </a>
   );
 }
 
 function Header({ active }) {
   const [menuOpen, setMenuOpen] = useState(false);
-
   useEffect(() => {
     document.body.classList.toggle("menu-open", menuOpen);
     return () => document.body.classList.remove("menu-open");
   }, [menuOpen]);
-
-  const activeIndex = sectionLinks.findIndex(([, , href]) => href === `#${active}`);
-
+  const activeIndex = Math.max(0, sectionLinks.findIndex(([, , href]) => href === `#${active}`));
   return (
     <>
       <header className="site-header">
-        <button className="icon-button menu-button" type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
-          {menuOpen ? <X size={21} weight="bold" /> : <List size={21} weight="bold" />}
-        </button>
-        <BrandLogo />
-        <div className="header-actions">
-          <span className="section-status">{String(activeIndex + 1).padStart(2, "0")}<i>/</i>04</span>
-          <a className="header-cta" href="#download">Download report <DownloadSimple size={18} weight="bold" /></a>
+        <div className="header-grid site-grid">
+          <button className="icon-button menu-button" type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
+            <MorphIcon icon={menuOpen ? X : Menu} size={21} strokeWidth={2} spring="snappy" reducedMotion="user" />
+          </button>
+          <BrandLogo />
+          <div className="header-actions">
+            <span className="section-status">{String(activeIndex + 1).padStart(2, "0")}<i>/</i>04</span>
+            <a className="header-cta interactive-icon" href="#download"><span>Download report</span><ActionIcon from={ArrowRight} to={Download} size={18} /></a>
+          </div>
         </div>
       </header>
-
       <div className={`menu-panel ${menuOpen ? "is-open" : ""}`} aria-hidden={!menuOpen}>
-        <nav aria-label="Page sections">
-          <p className="eyebrow">Navigate the report</p>
-          {sectionLinks.map(([number, label, href]) => (
-            <a key={href} href={href} onClick={() => setMenuOpen(false)}>
-              <span>{number}</span>{label}<ArrowRight size={24} />
-            </a>
-          ))}
-        </nav>
-        <div className="menu-visual" aria-hidden="true"><img src={assetPath("assets/decision-prism.webp")} alt="" /></div>
+        <div className="menu-grid site-grid">
+          <p className="eyebrow menu-kicker">Navigate the report</p>
+          <nav aria-label="Page sections">
+            {sectionLinks.map(([number, label, href]) => (
+              <a className="interactive-icon" key={href} href={href} onClick={() => setMenuOpen(false)}><span>{number}</span><strong>{label}</strong><ActionIcon from={ArrowRight} to={Sparkles} size={25} /></a>
+            ))}
+          </nav>
+          <div className="menu-orbit" aria-hidden="true"><span /><span /><span /><i>90</i></div>
+        </div>
       </div>
     </>
   );
 }
 
+function DecisionCanvas() {
+  const canvasRef = useRef(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let width = 0, height = 0, frame = 0, time = 0;
+    let pointer = { x: 0.62, y: 0.46 };
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width; height = rect.height;
+      canvas.width = Math.max(1, Math.round(width * dpr)); canvas.height = Math.max(1, Math.round(height * dpr));
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    const onMove = (event) => {
+      const rect = canvas.getBoundingClientRect();
+      pointer = { x: (event.clientX - rect.left) / rect.width, y: (event.clientY - rect.top) / rect.height };
+    };
+    const point = (x, y, phase = 0) => ({ x: width * x + Math.sin(time * 0.017 + phase) * 5, y: height * y + Math.cos(time * 0.014 + phase) * 5 });
+    const draw = () => {
+      context.clearRect(0, 0, width, height);
+      const px = (pointer.x - 0.5) * 16, py = (pointer.y - 0.5) * 16;
+      const starts = [point(0.08, 0.22, 0), point(0.04, 0.46, 1.7), point(0.13, 0.74, 3.2), point(0.42, 0.9, 4.8)];
+      const focus = point(0.72 + px / Math.max(width, 1), 0.48 + py / Math.max(height, 1), 2.2);
+      context.save(); context.lineCap = "round";
+      starts.forEach((start, index) => {
+        const gradient = context.createLinearGradient(start.x, start.y, focus.x, focus.y);
+        gradient.addColorStop(0, "rgba(61,232,202,0.04)"); gradient.addColorStop(0.68, index === 3 ? "rgba(111,103,255,0.28)" : "rgba(61,232,202,0.34)"); gradient.addColorStop(1, "rgba(61,232,202,0.82)");
+        context.strokeStyle = gradient; context.lineWidth = index === 1 ? 1.5 : 1; context.beginPath(); context.moveTo(start.x, start.y);
+        context.bezierCurveTo(width * (0.32 + index * 0.025), start.y, width * (0.46 - index * 0.018), focus.y, focus.x, focus.y); context.stroke();
+      });
+      starts.forEach((node, index) => { context.fillStyle = index === 3 ? "rgba(136,120,255,.9)" : "rgba(61,232,202,.88)"; context.beginPath(); context.arc(node.x, node.y, index === 1 ? 4 : 2.8, 0, Math.PI * 2); context.fill(); });
+      const pulse = reduced ? 10 : 10 + Math.sin(time * 0.025) * 3;
+      context.strokeStyle = "rgba(61,232,202,.55)"; context.lineWidth = 1; context.beginPath(); context.arc(focus.x, focus.y, pulse, 0, Math.PI * 2); context.stroke();
+      context.strokeStyle = "rgba(61,232,202,.16)"; context.beginPath(); context.arc(focus.x, focus.y, pulse + 18, 0, Math.PI * 2); context.stroke(); context.restore();
+      if (!reduced) { time += 1; frame = requestAnimationFrame(draw); }
+    };
+    const observer = new ResizeObserver(() => { resize(); draw(); });
+    observer.observe(canvas); canvas.addEventListener("pointermove", onMove); resize(); draw();
+    return () => { observer.disconnect(); canvas.removeEventListener("pointermove", onMove); cancelAnimationFrame(frame); };
+  }, []);
+  return <canvas className="decision-canvas" ref={canvasRef} aria-hidden="true" />;
+}
+
 function Hero() {
   return (
     <section className="hero dark-section" id="priority" data-section>
-      <div className="hero-backdrop" aria-hidden="true"><img src={assetPath("assets/esg-hero-scene.webp")} alt="" /></div>
-      <div className="section-frame hero-grid">
-        <div className="hero-copy reveal">
-          <p className="eyebrow">The Critical 90 · Executive guide</p>
-          <h1>Focus your cyber budget on the four shifts that matter most</h1>
-          <p className="lead">As you plan next year’s budget, the challenge isn’t deciding whether to spend on cybersecurity, but where to spend.</p>
-          <p className="hero-support">Kaspersky has identified the four cyber shifts expected to have the greatest impact on businesses worldwide through late 2026 and early 2027 — turning them into a practical 90-day action plan.</p>
-          <a className="primary-cta" href="#shifts">Get your priorities for the next 90 days <ArrowRight size={21} weight="bold" /></a>
+      <div className="hero-aurora" aria-hidden="true" />
+      <div className="hero-frame site-grid">
+        <div className="hero-copy reveal"><p className="eyebrow">The Critical 90 · Executive guide</p><h1>Focus your cyber budget on the four shifts that matter most</h1>
+          <a className="primary-cta interactive-icon" href="#decision"><span>Get your priorities for the next 90 days</span><ActionIcon from={ArrowRight} to={Sparkles} size={21} /></a>
         </div>
-        <figure className="hero-visual reveal" aria-label="The Critical 90 visual system">
-          <img src={assetPath("assets/critical90-cover.webp")} alt="Kaspersky cyber-resilience city rendered in dark glass and green light" />
-          <figcaption><span>Revenue</span><span>Compliance</span><span>Customer trust</span></figcaption>
-        </figure>
+        <div className="hero-system reveal" aria-label="A decision engine bringing four cyber shifts into one focused 90-day plan">
+          <DecisionCanvas /><img src={assetPath("assets/decision-engine-v2.png")} alt="A transparent glass and graphite decision engine with four connected nodes" />
+          <div className="system-label system-label-a"><span>04</span> shifts</div><div className="system-label system-label-b"><span>90</span> days</div>
+        </div>
       </div>
-      <a className="scroll-cue" href="#shifts">Explore the four shifts <ArrowDown size={18} /></a>
+      <a className="scroll-cue interactive-icon" href="#decision"><span>Why these priorities</span><ActionIcon from={ArrowDown} to={Sparkles} size={18} /></a>
     </section>
+  );
+}
+
+function DecisionSection() {
+  return (
+    <section className="decision-section" id="decision"><div className="section-frame site-grid">
+      <p className="eyebrow decision-kicker reveal">01 · The priority</p>
+      <div className="decision-statement reveal"><p>As you plan next year’s budget, the challenge isn’t deciding whether to spend on cybersecurity, but <em>where to spend.</em></p></div>
+      <div className="decision-support reveal"><span className="support-line" aria-hidden="true" /><p>Kaspersky has identified the four cyber shifts expected to have the greatest impact on businesses worldwide through late 2026 and early 2027 — turning them into a practical 90-day action plan.</p>
+        <a className="text-link interactive-icon" href="#shifts"><span>Understand the four shifts</span><ActionIcon from={ArrowRight} to={Sparkles} size={19} /></a>
+      </div>
+    </div></section>
   );
 }
 
 function Shifts() {
   const [activeShift, setActiveShift] = useState(0);
-
   return (
-    <section className="shifts-section dark-section" id="shifts" data-section>
-      <div className="section-frame">
-        <div className="section-heading split-heading reveal">
-          <div><p className="eyebrow">02 · The four cyber shifts</p><h2>Understand the four shifts reshaping business risk</h2></div>
-          <p>The Critical 90 guide examines four closely connected cyber shifts through a business lens. It explains where exposure may arise, what the potential consequences are and which actions your business should prioritize over the next 90 days.</p>
-        </div>
-        <Swiper className="shift-swiper" modules={[Pagination, A11y]} pagination={{ clickable: true }} spaceBetween={12} slidesPerView={1.15} breakpoints={{ 640: { slidesPerView: 2.15 }, 1120: { slidesPerView: 4 } }} onSlideChange={(swiper) => setActiveShift(swiper.realIndex)}>
-          {shifts.map((shift, index) => (
-            <SwiperSlide key={shift}>
-              <button className={`shift-card ${activeShift === index ? "is-active" : ""}`} type="button" onClick={() => setActiveShift(index)} aria-pressed={activeShift === index}>
-                <span>{String(index + 1).padStart(2, "0")}</span><strong>{shift}</strong><i aria-hidden="true" />
-              </button>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <div className="shift-stage reveal">
-          <div className="shift-media">
-            {activeShift === 0 ? (
-              <video autoPlay muted loop playsInline poster={assetPath("assets/ai-domino.webp")} aria-label="AI accelerating attacks visual"><source src={assetPath("assets/ai-shift.mp4")} type="video/mp4" /></video>
-            ) : (
-              <img src={assetPath("assets/four-shifts.webp")} alt="Four connected cyber shifts represented as one technological system" />
-            )}
-            <div className="shift-index" aria-hidden="true">0{activeShift + 1}</div>
-          </div>
-          <div className="shift-evidence">
-            <p className="eyebrow">For each shift, the guide identifies</p>
-            <ul>{evidence.map((item) => <li key={item}>{item}</li>)}</ul>
-            <p className="stage-summary">Get better visibility, clearer ownership and evidence that your business can respond when its operations, finances or trust are at stake.</p>
-            <a className="text-link" href="#framework">See the 90-day agenda <ArrowRight size={18} /></a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <section className="shifts-section dark-section" id="shifts" data-section><div className="section-frame site-grid">
+      <div className="shifts-heading reveal"><p className="eyebrow">02 · The four cyber shifts</p><h2>Understand the four shifts reshaping business risk</h2></div>
+      <figure className="shifts-object reveal"><div className="object-aura" aria-hidden="true" /><img src={assetPath("assets/four-shifts-system-v2.png")} alt="Four linked technology modules representing connected cyber shifts" /><figcaption><span>0{activeShift + 1}</span>{shifts[activeShift].title}</figcaption></figure>
+      <div className="shift-grid reveal">{shifts.map((shift, index) => (
+        <button className={`shift-card ${activeShift === index ? "is-active" : ""}`} key={shift.title} type="button" onClick={() => setActiveShift(index)} onPointerEnter={() => setActiveShift(index)} onFocus={() => setActiveShift(index)} aria-pressed={activeShift === index}>
+          <span className="shift-number">0{index + 1}</span><MorphGlyph from={shift.from} to={shift.to} active={activeShift === index} size={30} /><strong>{shift.title}</strong><i aria-hidden="true" />
+        </button>
+      ))}</div>
+    </div></section>
   );
 }
 
-function Framework() {
-  const [activePhase, setActivePhase] = useState(0);
-
+function EvidenceSection() {
+  const [active, setActive] = useState(0);
   return (
-    <section className="framework-section" id="framework" data-section>
-      <div className="section-frame framework-grid">
-        <div className="framework-copy reveal">
-          <p className="eyebrow">03 · The report: 90 days</p>
-          <h2>From four shifts to one business agenda: Why the next 90 days?</h2>
-          <p className="lead">Cyber risk is changing faster than many business controls, leading many cyber strategies to treat everything as “urgent”.</p>
-          <p>Our three-month framework flips this entirely. You get a step-by-step timeline that dictates:</p>
-          <div className="phase-tabs" role="tablist" aria-label="90-day action plan">
-            {phases.map((phase, index) => <button key={phase.day} className={activePhase === index ? "is-active" : ""} role="tab" aria-selected={activePhase === index} onClick={() => setActivePhase(index)}>{phase.day}</button>)}
-          </div>
-          <div className="phase-detail" role="tabpanel" aria-live="polite">
-            <span>{phases[activePhase].kicker}</span><h3>{phases[activePhase].title}</h3><p>{phases[activePhase].text}</p>
-          </div>
-          <a className="primary-cta dark-cta" href="#download">Start separating the critical from the noise <ArrowRight size={21} weight="bold" /></a>
-        </div>
-        <figure className="timeline-visual reveal">
-          <span className="timeline-number">{phases[activePhase].day}</span>
-          <img src={assetPath("assets/90-day-tower.webp")} alt="A glass 30, 60 and 90 day planning instrument" />
-          <figcaption>Critical → moderate → measured</figcaption>
-        </figure>
-      </div>
-    </section>
+    <section className="evidence-section dark-section" id="evidence"><div className="section-frame site-grid">
+      <div className="evidence-heading reveal"><p className="eyebrow">For each shift</p><h2>The guide identifies</h2></div>
+      <div className="evidence-list reveal">{evidence.map((item, index) => (
+        <button type="button" key={item.title} className={active === index ? "is-active" : ""} onPointerEnter={() => setActive(index)} onFocus={() => setActive(index)} onClick={() => setActive(index)}>
+          <span>0{index + 1}</span><strong>{item.title}</strong><MorphGlyph from={item.from} to={item.to} active={active === index} size={25} />
+        </button>
+      ))}</div>
+      <a className="primary-cta evidence-cta interactive-icon reveal" href="#framework"><span>See the 90-day agenda</span><ActionIcon from={ArrowRight} to={Sparkles} size={21} /></a>
+    </div></section>
+  );
+}
+
+function FrameworkIntro() {
+  return (
+    <section className="framework-intro" id="framework" data-section><div className="section-frame site-grid">
+      <div className="framework-copy reveal"><p className="eyebrow">03 · The report: 90 days</p><h2>From four shifts to one business agenda: Why the next 90 days?</h2><p className="lead">Cyber risk is changing faster than many business controls, leading many cyber strategies to treat everything as “urgent”.</p></div>
+      <figure className="timeline-object reveal"><span className="timeline-rail" aria-hidden="true"><i /><i /><i /></span><img src={assetPath("assets/90-day-instrument-v2.png")} alt="A three-stage glass and graphite 90-day planning instrument" /><figcaption>30 <span>→</span> 60 <span>→</span> 90</figcaption></figure>
+    </div></section>
+  );
+}
+
+function ActionPlan() {
+  const [activePhase, setActivePhase] = useState(0);
+  return (
+    <section className="action-plan" id="action-plan"><div className="section-frame site-grid">
+      <div className="plan-heading reveal"><p className="eyebrow">Critical → moderate → measured</p><h2>One practical 90-day action plan</h2></div>
+      <div className="phase-grid reveal" role="tablist" aria-label="90-day action plan">{phases.map((phase, index) => (
+        <button key={phase.day} type="button" role="tab" aria-selected={activePhase === index} className={`phase-card ${activePhase === index ? "is-active" : ""}`} onClick={() => setActivePhase(index)} onPointerEnter={() => setActivePhase(index)} onFocus={() => setActivePhase(index)}>
+          <div className="phase-top"><span>{phase.day}</span><MorphGlyph from={phase.from} to={phase.to} active={activePhase === index} size={30} /></div><small>{phase.kicker}</small><h3>{phase.title}</h3><p>{phase.text}</p><i className="phase-progress" aria-hidden="true" />
+        </button>
+      ))}</div>
+      <a className="primary-cta dark-cta interactive-icon reveal" href="#download"><span>Start separating the critical from the noise</span><ActionIcon from={ArrowRight} to={Sparkles} size={21} /></a>
+    </div></section>
   );
 }
 
 function DownloadSection() {
   const dialogRef = useRef(null);
-
   return (
-    <section className="download-section dark-section" id="download" data-section>
-      <video className="download-video" autoPlay muted loop playsInline aria-hidden="true"><source src={assetPath("assets/kaspersky-finale.mp4")} type="video/mp4" /></video>
-      <div className="download-shade" aria-hidden="true" />
-      <div className="section-frame download-copy reveal">
-        <p className="eyebrow">04 · The next 90 days</p>
-        <h2>Start reducing cyber risk in the next 90 days</h2>
-        <button className="primary-cta" type="button" onClick={() => dialogRef.current?.showModal()}>Download The Critical 90 <DownloadSimple size={21} weight="bold" /></button>
-      </div>
-      <dialog className="download-dialog" ref={dialogRef} onClick={(event) => { if (event.target === dialogRef.current) dialogRef.current.close(); }}>
-        <button className="dialog-close" type="button" aria-label="Close" onClick={() => dialogRef.current?.close()}><X size={22} /></button>
-        <img src={assetPath("assets/kaspersky-logo.svg")} alt="Kaspersky" />
-        <p className="eyebrow">The Critical 90</p>
-        <h3>Download asset ready to connect</h3>
-        <p>Add the final report PDF to <code>public/the-critical-90.pdf</code>; the production download action is already isolated here.</p>
-      </dialog>
+    <section className="download-section dark-section" id="download" data-section><div className="download-orbits" aria-hidden="true"><span /><span /><span /><i /></div>
+      <div className="section-frame site-grid download-grid"><div className="download-copy reveal"><p className="eyebrow">04 · The next 90 days</p><h2>Start reducing cyber risk in the next 90 days</h2>
+        <button className="primary-cta interactive-icon" type="button" onClick={() => dialogRef.current?.showModal()}><span>Download The Critical 90</span><ActionIcon from={ArrowRight} to={Download} size={21} /></button>
+      </div><div className="download-mark reveal" aria-hidden="true"><span>90</span><i /></div></div>
+      <dialog className="download-dialog" ref={dialogRef} onClick={(event) => { if (event.target === dialogRef.current) dialogRef.current.close(); }}><button className="dialog-close" type="button" aria-label="Close" onClick={() => dialogRef.current?.close()}><MorphIcon icon={X} size={22} strokeWidth={1.8} reducedMotion="user" /></button><img src={assetPath("assets/kaspersky-logo.svg")} alt="Kaspersky" /><p className="eyebrow">The Critical 90</p><h3>Download asset ready to connect</h3><p>Add the final report PDF to <code>public/the-critical-90.pdf</code>; the production download action is already isolated here.</p></dialog>
       <footer><BrandLogo /><span>Executive guide · 2026–2027</span></footer>
     </section>
   );
@@ -219,12 +256,10 @@ function DownloadSection() {
 
 export function App() {
   const active = useActiveSection();
-
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")), { threshold: 0.12 });
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")), { threshold: 0.1 });
     document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, []);
-
-  return <><a className="skip-link" href="#priority">Skip to content</a><Header active={active} /><main><Hero /><Shifts /><Framework /><DownloadSection /></main></>;
+  return <><a className="skip-link" href="#priority">Skip to content</a><Header active={active} /><main><Hero /><DecisionSection /><Shifts /><EvidenceSection /><FrameworkIntro /><ActionPlan /><DownloadSection /></main></>;
 }
