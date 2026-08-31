@@ -118,6 +118,62 @@ const variantRoutes = [
       return PosterApp;
     },
   },
+  {
+    match: "/variants/future",
+    className: "future-page",
+    load: async () => {
+      const [{ FutureApp }] = await Promise.all([import("./variants/promos/PromoApps.jsx"), import("./variants/promos/promos.css")]);
+      return FutureApp;
+    },
+  },
+  {
+    match: "/variants/threatmap",
+    className: "threat-page",
+    load: async () => {
+      const [{ ThreatMapApp }] = await Promise.all([import("./variants/promos/PromoApps.jsx"), import("./variants/promos/promos.css")]);
+      return ThreatMapApp;
+    },
+  },
+  {
+    match: "/variants/transparency",
+    className: "transparency-page",
+    load: async () => {
+      const [{ TransparencyApp }] = await Promise.all([import("./variants/promos/PromoApps.jsx"), import("./variants/promos/promos.css")]);
+      return TransparencyApp;
+    },
+  },
+  {
+    match: "/variants/universe",
+    className: "universe-page",
+    load: async () => {
+      const [{ UniverseApp }] = await Promise.all([import("./variants/promos/PromoApps.jsx"), import("./variants/promos/promos.css")]);
+      return UniverseApp;
+    },
+  },
+  {
+    match: "/variants/pathways",
+    className: "pathways-page",
+    load: async () => {
+      const [{ PathwaysApp }] = await Promise.all([import("./variants/promos/PromoApps.jsx"), import("./variants/promos/promos.css")]);
+      return PathwaysApp;
+    },
+  },
+  {
+    match: "/variants/journey",
+    className: "journey-page",
+    load: async () => {
+      const [{ JourneyApp }] = await Promise.all([import("./variants/promos/PromoApps.jsx"), import("./variants/promos/promos.css")]);
+      return JourneyApp;
+    },
+  },
+  {
+    match: "/variants/unlocked",
+    className: "unlocked-page",
+    load: async () => {
+      const [{ UnlockedApp }] = await Promise.all([import("./variants/promos/PromoApps.jsx"), import("./variants/promos/promos.css")]);
+      return UnlockedApp;
+    },
+  },
 ];
 
 async function resolveRoute() {

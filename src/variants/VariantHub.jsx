@@ -9,6 +9,13 @@ const variants = [
   { number: "08", group: "Independent systems", slug: "physics", title: "Risk Physics Lab", idea: "Stress-test the weight of every shift", engine: "Matter.js", tone: "Physics / tactile", image: "variants/physics/risk-tokens.png" },
   { number: "09", group: "Independent systems", slug: "graph", title: "Decision Graph", idea: "Navigate risk as a connected system", engine: "Cytoscape.js", tone: "Graph / exploratory", image: "variants/graph/network-constellation.png" },
   { number: "10", group: "Independent systems", slug: "poster", title: "Kinetic Poster", idea: "Four fullscreen typographic scenes", engine: "Konva", tone: "Poster / scene-based", image: "variants/poster/kinetic-ribbon.png" },
+  { number: "11", group: "Kaspersky promo studies", slug: "future", title: "Future Atlas", idea: "Time horizons on a living globe", engine: "Three.js", tone: "Earth 2050 / future map" },
+  { number: "12", group: "Kaspersky promo studies", slug: "threatmap", title: "Live Risk Map", idea: "Strategy rendered as live telemetry", engine: "p5.js", tone: "Cyberthreat Map / radar" },
+  { number: "13", group: "Kaspersky promo studies", slug: "transparency", title: "Evidence Atlas", idea: "A transparent 30–60–90 geography", engine: "regl", tone: "GTI / dot map" },
+  { number: "14", group: "Kaspersky promo studies", slug: "universe", title: "Decision Universe", idea: "Four shifts as an explorable universe", engine: "Babylon.js", tone: "Partnerverse / spatial" },
+  { number: "15", group: "Kaspersky promo studies", slug: "pathways", title: "Right Path", idea: "Choose the strategic role to activate", engine: "Lottie", tone: "Cyber Pathways / character-led" },
+  { number: "16", group: "Kaspersky promo studies", slug: "journey", title: "The 90-Day Journey", idea: "A tactile trip through executive action", engine: "Matter.js", tone: "One Dollar Lesson / crafted" },
+  { number: "17", group: "Kaspersky promo studies", slug: "unlocked", title: "Priorities Unlocked", idea: "Four shifts as a cinematic story series", engine: "PixiJS", tone: "Tomorrow Unlocked / editorial", image: "variants/unlocked/story-a.jpg" },
 ];
 
 const routeHref = (slug) => `${import.meta.env.BASE_URL}variants/${slug}/`;
@@ -27,10 +34,10 @@ export function VariantHub() {
       </header>
 
       <section className="variant-hub__intro">
-        <p className="variant-hub__eyebrow">Ten independent experiments</p>
-        <h1>One brief.<br />Ten decision systems.</h1>
+        <p className="variant-hub__eyebrow">Seventeen independent experiments</p>
+        <h1>One brief.<br />Seventeen decision systems.</h1>
         <p className="variant-hub__lead">
-          Identical strategic content, reinterpreted through ten grids, interaction models,
+          Identical strategic content, reinterpreted through seventeen grids, interaction models,
           image worlds and live engines — all grounded in the supplied Kaspersky slides.
         </p>
       </section>
@@ -53,7 +60,7 @@ export function VariantHub() {
 
       <div className="variant-hub__group-label variant-hub__group-label--second"><span>06—10</span><p>Independent systems / new study</p></div>
       <section className="variant-hub__grid variant-hub__grid--second" aria-label="Five independent website systems">
-        {variants.slice(5).map((variant) => (
+        {variants.slice(5, 10).map((variant) => (
           <a className={`variant-card variant-card--${variant.slug}`} href={routeHref(variant.slug)} key={variant.slug}>
             <span className="variant-card__number">{variant.number}</span>
             {variant.image ? <img className="variant-card__image" src={`${import.meta.env.BASE_URL}${variant.image}`} alt="" aria-hidden="true" /> : <div className="variant-card__signal" aria-hidden="true"><span /><span /><span /></div>}
@@ -67,7 +74,20 @@ export function VariantHub() {
         ))}
       </section>
 
-      <footer className="variant-hub__footer"><span>THE CRITICAL 90</span><span>Creative directions / 2026</span></footer>
+      <div className="variant-hub__group-label variant-hub__group-label--third"><span>11—17</span><p>Global Kaspersky promo-site audit / seven new architectures</p></div>
+      <section className="variant-hub__grid variant-hub__grid--third" aria-label="Seven Kaspersky promo-site studies">
+        {variants.slice(10).map((variant) => (
+          <a className={`variant-card variant-card--${variant.slug}`} href={routeHref(variant.slug)} key={variant.slug}>
+            <span className="variant-card__number">{variant.number}</span>
+            {variant.image ? <img className="variant-card__image" src={`${import.meta.env.BASE_URL}${variant.image}`} alt="" aria-hidden="true" /> : <div className="variant-card__signal" aria-hidden="true"><span /><span /><span /></div>}
+            <div className="variant-card__copy"><p>{variant.idea}</p><h2>{variant.title}</h2></div>
+            <dl><div><dt>Canvas</dt><dd>{variant.engine}</dd></div><div><dt>Source</dt><dd>{variant.tone}</dd></div></dl>
+            <span className="variant-card__open">Open experiment <b aria-hidden="true">↗</b></span>
+          </a>
+        ))}
+      </section>
+
+      <footer className="variant-hub__footer"><span>THE CRITICAL 90</span><span>17 creative directions / 2026</span></footer>
     </main>
   );
 }

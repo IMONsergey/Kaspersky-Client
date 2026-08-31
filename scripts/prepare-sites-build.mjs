@@ -30,6 +30,13 @@ const appRoutes = [
   "variants/physics",
   "variants/graph",
   "variants/poster",
+  "variants/future",
+  "variants/threatmap",
+  "variants/transparency",
+  "variants/universe",
+  "variants/pathways",
+  "variants/journey",
+  "variants/unlocked",
 ];
 
 for (const route of appRoutes) {
