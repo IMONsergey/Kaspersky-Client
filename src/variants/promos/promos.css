@@ -30,3 +30,4 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.threat-ticker span{animation:none}*{transition-duration:.01ms!important}}
 .threat-header{grid-template-columns:minmax(300px,1fr) auto minmax(170px,1fr);gap:36px}
 @media(max-width:700px){.threat-header{grid-template-columns:1fr auto;gap:18px}}
+.pathways-lead{padding:18px;background:rgba(248,248,246,.9);backdrop-filter:blur(8px)}
