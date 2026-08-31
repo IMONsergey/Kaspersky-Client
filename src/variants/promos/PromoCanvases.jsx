@@ -1,6 +1,12 @@
 import { useEffect, useRef } from "react";
 
 const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const webglAvailable = () => {
+  try {
+    const probe = document.createElement("canvas");
+    return Boolean(probe.getContext("webgl2") || probe.getContext("webgl"));
+  } catch { return false; }
+};
 
 export function FutureGlobe() {
   const ref = useRef(null);
@@ -10,6 +16,7 @@ export function FutureGlobe() {
     let renderer;
     let disposed = false;
     const boot = async () => {
+      if (!webglAvailable()) { host?.classList.add("is-static"); return; }
       const THREE = await import("three");
       if (disposed || !host) return;
       const scene = new THREE.Scene();
@@ -54,7 +61,7 @@ export function FutureGlobe() {
       window.addEventListener("resize", resize);
       host.__cleanup = () => window.removeEventListener("resize", resize);
     };
-    boot();
+    boot().catch(() => host?.classList.add("is-static"));
     return () => { disposed = true; cancelAnimationFrame(frame); host?.__cleanup?.(); renderer?.dispose(); };
   }, []);
   return <canvas ref={ref} className="promo-canvas" aria-label="Interactive future globe" />;
@@ -101,6 +108,7 @@ export function TransparencyField() {
     let disposed = false;
     import("regl").then(({ default: createREGL }) => {
       if (disposed || !canvas) return;
+      if (!webglAvailable()) { canvas.classList.add("is-static"); return; }
       regl = createREGL({ canvas, attributes: { alpha: true, antialias: true } });
       const points = [];
       for (let row = 0; row < 28; row += 1) for (let col = 0; col < 52; col += 1) {
@@ -115,7 +123,7 @@ export function TransparencyField() {
       });
       const loop = regl.frame(() => { regl.clear({ color: [0,0,0,0], depth: 1 }); draw(); });
       frame = loop;
-    });
+    }).catch(() => canvas?.classList.add("is-static"));
     return () => { disposed = true; frame?.cancel(); regl?.destroy(); };
   }, []);
   return <canvas ref={ref} className="promo-canvas" aria-label="Interactive transparency map" />;
@@ -132,6 +140,7 @@ export function PartnerUniverse() {
       import("@babylonjs/core/Maths/math.color.js"), import("@babylonjs/core/Maths/math.vector.js"),
     ]).then(([eng, scn, cam, mesh, mat, color, vec]) => {
       if (disposed || !canvas) return;
+      if (!webglAvailable()) { canvas.classList.add("is-static"); return; }
       engine = new eng.Engine(canvas, true, { alpha: true, antialias: true }); scene = new scn.Scene(engine); scene.clearColor = new color.Color4(0,0,0,0);
       const camera = new cam.FreeCamera("universe-camera", new vec.Vector3(0, 0, -13), scene); camera.setTarget(vec.Vector3.Zero());
       const makeMat = (name, hex) => { const m = new mat.StandardMaterial(name, scene); m.emissiveColor = color.Color3.FromHexString(hex); m.diffuseColor = m.emissiveColor.scale(.28); return m; };
@@ -143,7 +152,7 @@ export function PartnerUniverse() {
       });
       engine.runRenderLoop(()=>{ if(!reduced()) planets.forEach((p,i)=>{p.rotation.y+=.0015+i*.0002; p.position.y+=Math.sin(performance.now()*.0007+i)*.0007;}); scene.render(); });
       const resize=()=>engine.resize(); window.addEventListener("resize",resize); canvas.__cleanup=()=>window.removeEventListener("resize",resize);
-    });
+    }).catch(() => canvas?.classList.add("is-static"));
     return()=>{disposed=true; canvas?.__cleanup?.(); scene?.dispose(); engine?.dispose();};
   },[]);
   return <canvas ref={ref} className="promo-canvas" aria-label="Interactive strategic universe" />;
