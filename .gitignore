@@ -9,3 +9,7 @@ tmp/
 # Client materials are kept locally while this repository is public.
 references/prototypes/*.png
 references/style/*.pdf
+
+# Reproducible raw screenshot captures; curated QA sheets are versioned.
+qa/variants-round3/sources/
+qa/variants-round3/production/
